@@ -2,7 +2,7 @@ import { connectDB } from "@/lib/connectDB";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { Db } from "mongodb";
+// import { Db } from "mongodb";
 
 const handler = NextAuth({
   secret: process.env.NEXT_PUBLIC_AUTH_SECRET as string,
@@ -25,7 +25,11 @@ const handler = NextAuth({
           return null;
         }
 
-        const db: Db = await connectDB();
+        const db = await connectDB();
+        if (!db) {
+          return null; // MongoDB কানেকশন ব্যর্থ হলে কিছু ফেরত দেবেন না।
+        }
+
         const currentUser = await db.collection("users").findOne({ email });
 
         if (!currentUser) {
