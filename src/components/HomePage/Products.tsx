@@ -31,16 +31,7 @@ const Products =  () => {
     fetchBookings();
   }, [currentPage, filter, itemsPerPage, search]);
 
-  useEffect(() => {
-    const getCount = async () => {
-      const { data } = await axios(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/users-count?filter=${filter}&search=${search}`
-      );
-  
-      setCount(data.count); 
-    };
-    getCount();
-  }, [filter, search]);
+
 
   useEffect(() => {
     const getCount = async () => {

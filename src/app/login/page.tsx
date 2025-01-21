@@ -61,6 +61,12 @@ const Page: React.FC = () => {
               Sign In
             </button>
           </form>
+
+          <div className="text-center mt-4">
+            <Link href="/forgot-password" className="text-blue-600 hover:text-blue-800">
+              Forgot Password?
+            </Link>
+          </div>
           <div>
             <h6 className="my-8 text-center">
               Not have an account?{" "}
