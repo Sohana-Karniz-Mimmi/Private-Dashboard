@@ -24,7 +24,7 @@ const SignUpPage: React.FC = () => {
     // console.log(newUser);
 
     try {
-      const resp = await fetch("http://localhost:3000/signup/api", {
+      const resp = await fetch("https://private-dashboard-v3nq.vercel.app/signup/api", {
         method: "POST",
         body: JSON.stringify(newUser),
         headers: {
