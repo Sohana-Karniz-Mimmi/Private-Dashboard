@@ -16,6 +16,7 @@ type Product = {
   price: number;
 };
 const Products = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);
