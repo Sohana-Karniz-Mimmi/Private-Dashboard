@@ -7,10 +7,16 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import axios from "axios";
 
 type Product = {
-  id: number;
+  _id: string;
   title: string;
+  photo: {
+    thumbnail: string;
+    cover: string;
+  };
+  price: number;
 };
 const Products = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [itemsPerPage, setItemsPerPage] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
   const [count, setCount] = useState(0);

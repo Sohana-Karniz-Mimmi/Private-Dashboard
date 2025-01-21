@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 
 const SignUpPage: React.FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -34,7 +34,7 @@ const SignUpPage: React.FC = () => {
 
       if (resp.status === 200) {
         form.reset();
-        router.push("/login");
+        // router.push("/login");
         toast.success("Sign-up successful!");
       } else {
         toast.error("Failed to sign up. Please try again.");
