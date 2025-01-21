@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import { ClientProviders } from "@/services/ClientProviders";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Private Dashboard",
@@ -16,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body>
-        <ClientProviders>
-          <Navbar />
-          {children} 
-        </ClientProviders>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ClientProviders>
+            <Navbar />
+            {children}
+          </ClientProviders>
+        </Suspense>
       </body>
     </html>
   );
