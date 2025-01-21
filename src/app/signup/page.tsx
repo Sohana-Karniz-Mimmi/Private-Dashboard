@@ -14,12 +14,12 @@ const SignUpPage: React.FC = () => {
     const password = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
 
+
     const newUser = {
       name,
       email,
       password,
     };
-
 
     // console.log(newUser);
 
