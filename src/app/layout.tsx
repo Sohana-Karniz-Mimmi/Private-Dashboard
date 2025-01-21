@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
-import AuthProvider from "@/services/AuthProvider";
+import { ClientProviders } from "@/services/ClientProviders";
 
 export const metadata: Metadata = {
   title: "Private Dashboard",
@@ -16,10 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body>
-        <AuthProvider>
+        <ClientProviders>
           <Navbar />
           {children}
-        </AuthProvider>
+        </ClientProviders>
       </body>
     </html>
   );

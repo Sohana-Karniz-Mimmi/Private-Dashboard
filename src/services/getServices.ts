@@ -1,38 +1,27 @@
 import axios from "axios";
 
 interface Service {
-  id: string;
+  _id: string;
+  title: string;
   name: string;
   description: string;
+  photo: {
+    thumbnail: string;
+    cover: string;
+  };
   price: number;
-  // Add more fields based on your API response
 }
 
-interface ServiceDetails extends Service {
-  additionalInfo?: string; // Example for additional details in the service
-  // Add more fields as necessary
-}
 
-export const getServices = async (): Promise<Service[]> => {
+export const getServices = async (): Promise<{ services: Service[] }> => {
   try {
-    const res = await axios.get<Service[]>(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/services/api/get-all`
+    const res = await axios.get<{ services: Service[] }>(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/services/api/get-all?search=Laptop`
     );
     return res.data;
   } catch (error) {
     console.error(error);
-    return [];
+    return { services: [] };
   }
 };
 
-export const getServicesDetails = async (id: string): Promise<ServiceDetails> => {
-  try {
-    const res = await axios.get<ServiceDetails>(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/services/api/${id}`
-    );
-    return res.data;
-  } catch (error) {
-    console.error(error);
-    return {} as ServiceDetails;
-  }
-};

@@ -2,40 +2,42 @@
 import Link from "next/link";
 
 const SignUpPage: React.FC = () => {
-  // handleSignUp ফাংশনে টাইপ যুক্ত করা হয়েছে
   const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
+    
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
+
     const newUser = {
-      name: form.name.value,
-      email: form.email.value,
-      password: form.password.value,
+      name,
+      email,
+      password,
     };
 
     console.log(newUser);
 
-      try {
-        const resp = await fetch(
-          "http://localhost:3000/signup/api",
-          {
-            method: "POST",
-            body: JSON.stringify(newUser),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+    try {
+      const resp = await fetch("http://localhost:3000/signup/api", {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-        if (resp.status === 200) {
-          form.reset(); // ফর্ম রিসেট করে দেয়া হবে
-          alert("Sign-up successful!");
-        } else {
-          alert("Failed to sign up. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error during sign-up:", error);
-        alert("An error occurred. Please try again later.");
+      if (resp.status === 200) {
+        form.reset();
+        alert("Sign-up successful!");
+      } else {
+        alert("Failed to sign up. Please try again.");
       }
+    } catch (error) {
+      console.error("Error during sign-up:", error);
+      alert("An error occurred. Please try again later.");
+    }
   };
 
   return (

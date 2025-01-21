@@ -2,7 +2,6 @@ import { connectDB } from "@/lib/connectDB";
 import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 
-// Define the user data type
 interface User {
   name: string;
   email: string;
@@ -10,9 +9,12 @@ interface User {
 }
 
 export const POST = async (request: NextRequest) => {
-  const newUser: User = await request.json(); // Type the incoming data
+  const newUser: User = await request.json(); 
   try {
     const db = await connectDB();
+    if (!db) {
+      return NextResponse.json({ error: 'Failed to connect to database' }, { status: 500 });
+    }
     const userCollection = db.collection("users");
 
     // Check if the user already exists
@@ -28,14 +30,13 @@ export const POST = async (request: NextRequest) => {
     const hashedPassword = bcrypt.hashSync(newUser.password, 14);
 
     // Insert the new user into the database
-    const resp = await userCollection.insertOne({
+     await userCollection.insertOne({
       ...newUser,
       password: hashedPassword,
     });
 
     return NextResponse.json({ message: "User Created" }, { status: 200 });
   } catch (error) {
-    // Return error response if something goes wrong
     return NextResponse.json(
       { message: "Something Went Wrong", error },
       { status: 500 }
