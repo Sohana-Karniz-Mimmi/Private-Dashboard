@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Page: React.FC = () => {
   const searchParams = useSearchParams();
@@ -23,7 +24,7 @@ const Page: React.FC = () => {
 
     if (response?.error) {
       console.error("Login failed:", response.error);
-      alert("Invalid email or password");
+      toast.error("Invalid email or password");
     }
   };
 

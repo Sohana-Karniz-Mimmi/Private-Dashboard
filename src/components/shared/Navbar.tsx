@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <Link href={"/"}>
-            <h2>PrivateDashboard</h2>
+            <h2 className="text-2xl text-black font-bold">PrivateDashboard</h2>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -46,12 +46,16 @@ const Navbar: React.FC = () => {
         </div>
         <div className="navbar-end">
           <div className="flex space-x-3 items-center">
-            <a className="btn btn-outline btn-primary px-8">Appointment</a>
             {session.status === "loading" && <h6>Loading....</h6>}
             {session.status === "unauthenticated" && (
-              <Link href="/login" className="btn btn-primary px-8">
+             <div >
+               <Link href="/signup" className="btn btn-primary text-white px-8 mr-2">
+              Register
+            </Link>
+              <Link href="/login" className="btn btn-primary text-white px-8">
                 Login
               </Link>
+             </div>
             )}
             {session.status === "authenticated" && (
               <button

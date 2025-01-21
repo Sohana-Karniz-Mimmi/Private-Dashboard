@@ -1,7 +1,7 @@
 import { connectDB } from "@/lib/connectDB";
 import { NextRequest, NextResponse } from "next/server";
 import crypto from 'crypto';
-import { sendResetEmail } from "@/lib/mail"; // We'll create this
+import { sendResetEmail } from "@/lib/mail"; 
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
     // Generate reset token
     const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpiry = Date.now() + 3600000; // 1 hour
+    const resetTokenExpiry = Date.now() + 3600000; 
 
     // Save reset token to user
     await db.collection("users").updateOne(

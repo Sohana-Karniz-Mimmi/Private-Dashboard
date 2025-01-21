@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 const SignUpPage: React.FC = () => {
+  const router = useRouter();
   const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -17,7 +20,8 @@ const SignUpPage: React.FC = () => {
       password,
     };
 
-    console.log(newUser);
+
+    // console.log(newUser);
 
     try {
       const resp = await fetch("http://localhost:3000/signup/api", {
@@ -30,13 +34,14 @@ const SignUpPage: React.FC = () => {
 
       if (resp.status === 200) {
         form.reset();
-        alert("Sign-up successful!");
+        router.push("/login");
+        toast.success("Sign-up successful!");
       } else {
-        alert("Failed to sign up. Please try again.");
+        toast.error("Failed to sign up. Please try again.");
       }
     } catch (error) {
       console.error("Error during sign-up:", error);
-      alert("An error occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.");
     }
   };
 

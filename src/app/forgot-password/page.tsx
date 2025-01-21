@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -15,8 +17,10 @@ export default function ForgotPassword() {
       });
       const data = await res.json();
       setMessage(data.message);
+      toast.success(data.message);
     } catch (error) {
       setMessage(`Something went wrong: ${error instanceof Error ? error.message : String(error)}`);
+      toast.error('User not found');
     }
   };
 
@@ -42,6 +46,7 @@ export default function ForgotPassword() {
         </form>
         {message && <p className="text-center mt-4">{message}</p>}
       </div>
+      <Toaster />
     </div>
   );
 } 
